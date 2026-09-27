@@ -1,0 +1,10 @@
+# Auto-generated secrets — never commit these!
+service_account.json
+youtube_token.json
+client_secrets.json
+*.env
+.env*
+__pycache__/
+*.pyc
+tmp_video.mp4
+tmp_thumb.jpg

@@ -1,0 +1,31 @@
+"""
+telegram_notifier.py — Send upload notifications to your Telegram bot.
+"""
+
+import requests
+
+
+class TelegramNotifier:
+    def __init__(self, bot_token: str, chat_id: str):
+        self.token   = bot_token
+        self.chat_id = chat_id
+        self.api_url = f"https://api.telegram.org/bot{bot_token}"
+
+    def send(self, message: str) -> bool:
+        """Send a markdown message to your Telegram chat."""
+        try:
+            r = requests.post(
+                f"{self.api_url}/sendMessage",
+                json={
+                    "chat_id":    self.chat_id,
+                    "text":       message,
+                    "parse_mode": "Markdown"
+                },
+                timeout=15
+            )
+            r.raise_for_status()
+            print(f"📨 Telegram notification sent!")
+            return True
+        except Exception as e:
+            print(f"⚠️  Telegram notification failed: {e}")
+            return False
