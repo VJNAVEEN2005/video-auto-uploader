@@ -1,24 +1,12 @@
 {
-  "generated_at": "2026-09-28T22:25:20.688000+05:30",
-  "generated_at_ist": "28 Sep 2026, 10:25 PM IST",
+  "generated_at": "2026-09-29T01:52:40.910163+05:30",
+  "generated_at_ist": "29 Sep 2026, 01:52 AM IST",
   "last_run": {
     "outcome": "success",
-    "url": "https://github.com/VJNAVEEN2005/video-auto-uploader/actions/runs/36454190414",
-    "at": "2026-09-28T22:25:20.688000+05:30"
+    "url": "https://github.com/VJNAVEEN2005/video-auto-uploader/actions/runs/36478414336",
+    "at": "2026-09-29T01:52:40.910163+05:30"
   },
-  "queue": [
-    {
-      "folder": "06_Titan_Bomb_Explosion",
-      "title": "Can Titan Explode Like a Giant Bomb? \ud83d\udca3\ud83d\udd2c (The Zero Oxygen Secret!) #shorts",
-      "video_mb": 67,
-      "has_video": true,
-      "has_thumb": true,
-      "has_meta": true,
-      "modified": "2026-09-28T16:03:15.046Z",
-      "drive_link": "https://drive.google.com/drive/folders/1SF1DIZP1pideQB1TMGMdX-J1-o6Yl5G-",
-      "ready": true
-    }
-  ],
+  "queue": [],
   "uploaded": [
     {
       "folder": "04_Titan_Methane_Rain",
@@ -39,6 +27,16 @@
       "has_meta": true,
       "modified": "2026-09-28T01:49:37.652Z",
       "drive_link": "https://drive.google.com/drive/folders/1ivyNssUcGaF8UMFkC_tK977nKPmXc6P-"
+    },
+    {
+      "folder": "06_Titan_Bomb_Explosion",
+      "title": "Can Titan Explode Like a Giant Bomb? \ud83d\udca3\ud83d\udd2c (The Zero Oxygen Secret!) #shorts",
+      "video_mb": 67,
+      "has_video": true,
+      "has_thumb": true,
+      "has_meta": true,
+      "modified": "2026-09-28T16:03:15.046Z",
+      "drive_link": "https://drive.google.com/drive/folders/1SF1DIZP1pideQB1TMGMdX-J1-o6Yl5G-"
     }
   ],
   "failed": [],
@@ -62,14 +60,24 @@
       "youtube_status": "\u2705 Uploaded",
       "instagram_url": "https://www.instagram.com/reel/Dd1qUKYAjNl/",
       "instagram_status": "\u2705 Posted"
+    },
+    {
+      "episode_id": "06_Titan_Bomb_Explosion",
+      "title": "Can Titan Explode Like a Giant Bomb? \ud83d\udca3\ud83d\udd2c (The Zero Oxygen Secret!) #shorts",
+      "upload_date": "2026-09-29",
+      "upload_time": "01:52 AM IST",
+      "youtube_url": "https://www.youtube.com/shorts/R_-ZPXX6OhU",
+      "youtube_status": "\u2705 Uploaded",
+      "instagram_url": "https://www.instagram.com/reel/Dd2B_2Xj3tO/",
+      "instagram_status": "\u2705 Posted"
     }
   ],
   "stats": {
-    "pending": 1,
-    "ready": 1,
+    "pending": 0,
+    "ready": 0,
     "blocked": 0,
-    "total_uploaded": 2,
+    "total_uploaded": 3,
     "failed": 0,
-    "streak": 1
+    "streak": 2
   }
 }
