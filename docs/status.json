@@ -1,23 +1,12 @@
 {
-  "generated_at": "2026-09-28T22:17:43.215436+05:30",
-  "generated_at_ist": "28 Sep 2026, 10:17 PM IST",
+  "generated_at": "2026-09-28T22:25:20.688000+05:30",
+  "generated_at_ist": "28 Sep 2026, 10:25 PM IST",
   "last_run": {
-    "outcome": "",
-    "url": "",
-    "at": null
+    "outcome": "success",
+    "url": "https://github.com/VJNAVEEN2005/video-auto-uploader/actions/runs/36454190414",
+    "at": "2026-09-28T22:25:20.688000+05:30"
   },
   "queue": [
-    {
-      "folder": "05_Titan_Secret_Ocean",
-      "title": "Titan Has a SECRET Ocean Under Its Ice #Shorts",
-      "video_mb": 83,
-      "has_video": true,
-      "has_thumb": true,
-      "has_meta": true,
-      "modified": "2026-09-28T01:49:37.652Z",
-      "drive_link": "https://drive.google.com/drive/folders/1ivyNssUcGaF8UMFkC_tK977nKPmXc6P-",
-      "ready": true
-    },
     {
       "folder": "06_Titan_Bomb_Explosion",
       "title": "Can Titan Explode Like a Giant Bomb? \ud83d\udca3\ud83d\udd2c (The Zero Oxygen Secret!) #shorts",
@@ -40,6 +29,16 @@
       "has_meta": true,
       "modified": "2026-09-28T01:46:02.728Z",
       "drive_link": "https://drive.google.com/drive/folders/19NvcWGdWLndjtov3bo1U2xGWd92xejBA"
+    },
+    {
+      "folder": "05_Titan_Secret_Ocean",
+      "title": "Titan Has a SECRET Ocean Under Its Ice #Shorts",
+      "video_mb": 83,
+      "has_video": true,
+      "has_thumb": true,
+      "has_meta": true,
+      "modified": "2026-09-28T01:49:37.652Z",
+      "drive_link": "https://drive.google.com/drive/folders/1ivyNssUcGaF8UMFkC_tK977nKPmXc6P-"
     }
   ],
   "failed": [],
@@ -53,13 +52,23 @@
       "youtube_status": "\u2705 Uploaded",
       "instagram_url": "https://www.instagram.com/reel/Dd0O-6WgQQ2/",
       "instagram_status": "\u2705 Posted"
+    },
+    {
+      "episode_id": "05_Titan_Secret_Ocean",
+      "title": "Titan Has a SECRET Ocean Under Its Ice #Shorts",
+      "upload_date": "2026-09-28",
+      "upload_time": "10:25 PM IST",
+      "youtube_url": "https://www.youtube.com/shorts/__SFkaoMa34",
+      "youtube_status": "\u2705 Uploaded",
+      "instagram_url": "https://www.instagram.com/reel/Dd1qUKYAjNl/",
+      "instagram_status": "\u2705 Posted"
     }
   ],
   "stats": {
-    "pending": 2,
-    "ready": 2,
+    "pending": 1,
+    "ready": 1,
     "blocked": 0,
-    "total_uploaded": 1,
+    "total_uploaded": 2,
     "failed": 0,
     "streak": 1
   }
