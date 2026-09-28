@@ -12,9 +12,11 @@ from datetime import datetime
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 from google.oauth2 import service_account
+from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
 
 SCOPES = [
-    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/drive.file",
 ]
 
 # ── Folder names inside your Google Drive root folder ─────────────────────────
@@ -31,12 +33,31 @@ LOG_HEADERS = [
 
 
 class DriveHandler:
-    def __init__(self, service_account_file: str):
-        creds = service_account.Credentials.from_service_account_file(
-            service_account_file, scopes=SCOPES
-        )
+    def __init__(self, service_account_file: str = None):
+        # Prefer OAuth Drive token (from DRIVE_TOKEN_JSON env var)
+        drive_token_json = os.environ.get("DRIVE_TOKEN_JSON")
+        if drive_token_json:
+            token_data = json.loads(drive_token_json)
+            client_id     = os.environ.get("YOUTUBE_CLIENT_ID", "")
+            client_secret = os.environ.get("YOUTUBE_CLIENT_SECRET", "")
+            creds = Credentials(
+                token=token_data.get("token"),
+                refresh_token=token_data.get("refresh_token"),
+                token_uri="https://oauth2.googleapis.com/token",
+                client_id=client_id,
+                client_secret=client_secret,
+                scopes=SCOPES
+            )
+            if creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+        else:
+            # Fallback to service account (read-only operations work fine)
+            creds = service_account.Credentials.from_service_account_file(
+                service_account_file, scopes=["https://www.googleapis.com/auth/drive"]
+            )
         self.service = build("drive", "v3", credentials=creds)
         self.root_folder_id = os.environ["GOOGLE_DRIVE_FOLDER_ID"]
+
 
     # ── Internal: find a subfolder by name ────────────────────────────────────
     def _find_folder(self, name: str, parent_id: str = None) -> str | None:
