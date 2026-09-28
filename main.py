@@ -24,7 +24,7 @@ def main():
         sys.exit(1)
 
     drive    = DriveHandler()
-    yt       = YouTubeUploader(token_file="auto-uploader/youtube_token.json")
+    yt       = YouTubeUploader(token_file="youtube_token.json")
     ig       = InstagramUploader(
                     access_token=os.environ["INSTAGRAM_ACCESS_TOKEN"],
                     account_id=os.environ["INSTAGRAM_ACCOUNT_ID"]

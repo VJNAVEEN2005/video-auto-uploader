@@ -1,11 +1,11 @@
 """
-publish_status.py — writes auto-uploader/dashboard/status.json
+publish_status.py — writes docs/status.json
 
 The dashboard is a static GitHub Pages site with no access to Google Drive, so
 this script snapshots what Drive looks like after every workflow run and commits
 the result to the repo. The page just fetches that file.
 
-Run:  python auto-uploader/publish_status.py
+Run:  python publish_status.py
 """
 
 import json
@@ -16,7 +16,7 @@ from datetime import datetime, timezone, timedelta
 from drive_handler import DriveHandler, UPLOADED_FOLDER_NAME, FAILED_FOLDER_NAME, QUEUE_FOLDER_NAME
 
 IST = timezone(timedelta(hours=5, minutes=30))
-OUT_PATH = os.path.join("auto-uploader", "dashboard", "status.json")
+OUT_PATH = os.path.join("docs", "status.json")
 
 
 def day_streak(dates: list[str]) -> int:
