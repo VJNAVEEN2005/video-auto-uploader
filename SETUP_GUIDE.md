@@ -40,7 +40,8 @@ Create this structure in your Google Drive:
    - Name: `video-uploader`
    - Role: Editor
 6. Click the service account → **Keys tab → Add Key → JSON**
-7. Download the JSON file — this is your `GOOGLE_SERVICE_ACCOUNT_JSON`
+7. Download the JSON file for the separate server-side Worker integration. Do not
+   put this private key in the Pages repository or dashboard HTML.
 
 > ⚠️ **Important**: In Google Drive, right-click your `VideoAutoUploader` folder → Share → add the service account email (looks like `video-uploader@your-project.iam.gserviceaccount.com`) with Editor access!
 
@@ -132,7 +133,7 @@ Add each of these:
 
 | Secret Name | Value |
 |-------------|-------|
-| `GOOGLE_SERVICE_ACCOUNT_JSON` | Entire JSON content from Step 1 |
+| `DRIVE_TOKEN_JSON` | Entire contents of the Google OAuth token JSON used by the uploader |
 | `YOUTUBE_CLIENT_ID` | From OAuth credentials |
 | `YOUTUBE_CLIENT_SECRET` | From OAuth credentials |
 | `YOUTUBE_TOKEN_JSON` | Content of youtube_token.json from Step 2 |

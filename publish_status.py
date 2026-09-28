@@ -88,7 +88,7 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as exc:
-        # Never fail the upload job over a dashboard snapshot.
-        # ASCII only — this handler must not itself blow up on a cp1252 console.
-        print(f"[warn] Could not publish status.json: {type(exc).__name__}: {exc}")
-        sys.exit(0)
+        # Keep the original traceback and fail the process. A successful exit
+        # with an old status.json makes the dashboard look current when it is not.
+        print(f"[error] Could not publish status.json: {type(exc).__name__}: {exc}", file=sys.stderr)
+        raise

@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: refresh-dashboard
+  group: dashboard-main
   cancel-in-progress: false
 
 jobs:
@@ -42,14 +42,12 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 📊 Rebuild status.json from Drive
-        continue-on-error: true
         env:
           DRIVE_TOKEN_JSON: ${{ secrets.DRIVE_TOKEN_JSON }}
           GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
         run: python publish_status.py
 
       - name: 📤 Commit status.json to repo
-        continue-on-error: true
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -59,4 +57,10 @@ jobs:
           fi
           git add docs/status.json
           git commit -m "chore: refresh dashboard status [skip ci]"
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            echo "Push attempt $attempt failed; retrying..."
+            sleep 5
+          done
+          echo "Could not push refreshed status.json after 3 attempts."
+          exit 1
