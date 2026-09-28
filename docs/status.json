@@ -1,12 +1,23 @@
 {
-  "generated_at": "2026-09-28T08:32:51.454706+05:30",
-  "generated_at_ist": "28 Sep 2026, 08:32 AM IST",
+  "generated_at": "2026-09-28T08:57:57.490243+05:30",
+  "generated_at_ist": "28 Sep 2026, 08:57 AM IST",
   "last_run": {
     "outcome": "",
     "url": "",
     "at": null
   },
   "queue": [
+    {
+      "folder": "04_Titan_Methane_Rain",
+      "title": "A Planet Where It Literally Rains Pure Fuel?! #Shorts",
+      "video_mb": 154,
+      "has_video": true,
+      "has_thumb": true,
+      "has_meta": true,
+      "modified": "2026-09-28T01:46:02.728Z",
+      "drive_link": "https://drive.google.com/drive/folders/19NvcWGdWLndjtov3bo1U2xGWd92xejBA",
+      "ready": true
+    },
     {
       "folder": "05_Titan_Secret_Ocean",
       "title": "Titan Has a SECRET Ocean Under Its Ice #Shorts",
@@ -20,36 +31,14 @@
     }
   ],
   "uploaded": [],
-  "failed": [
-    {
-      "folder": "04_Titan_Methane_Rain",
-      "title": "A Planet Where It Literally Rains Pure Fuel?! #Shorts",
-      "video_mb": 154,
-      "has_video": true,
-      "has_thumb": true,
-      "has_meta": true,
-      "modified": "2026-09-28T01:46:02.728Z",
-      "drive_link": "https://drive.google.com/drive/folders/19NvcWGdWLndjtov3bo1U2xGWd92xejBA"
-    }
-  ],
-  "history": [
-    {
-      "episode_id": "04_Titan_Methane_Rain",
-      "title": "A Planet Where It Literally Rains Pure Fuel?! #Shorts",
-      "upload_date": "2026-09-28",
-      "upload_time": "08:26 AM IST",
-      "youtube_url": "https://www.youtube.com/shorts/FxoC7OJs6fY",
-      "youtube_status": "\u2705 Uploaded",
-      "instagram_url": "",
-      "instagram_status": "\u274c Failed: Instagram container error: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18099909716198490'}"
-    }
-  ],
+  "failed": [],
+  "history": [],
   "stats": {
-    "pending": 1,
-    "ready": 1,
+    "pending": 2,
+    "ready": 2,
     "blocked": 0,
     "total_uploaded": 0,
-    "failed": 1,
-    "streak": 1
+    "failed": 0,
+    "streak": 0
   }
 }
