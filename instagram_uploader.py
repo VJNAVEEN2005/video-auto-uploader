@@ -14,7 +14,7 @@ import requests
 
 
 class InstagramUploader:
-    BASE_URL = "https://graph.instagram.com/v19.0"
+    BASE_URL = "https://graph.instagram.com/v23.0"
 
     def __init__(self, access_token: str, account_id: str):
         self.token      = access_token
@@ -24,11 +24,14 @@ class InstagramUploader:
         self,
         video_url: str,
         caption: str,
-        thumbnail_path: str = None  # Note: IG Graph API doesn't support custom cover via file; URL needed
+        cover_url: str = None      # public URL to a JPEG cover image (9:16, <=8MB)
     ) -> dict:
         """
         Upload a Reel to Instagram via Graph API.
         video_url: publicly accessible URL (e.g., Google Drive public link)
+        cover_url: optional public URL to the cover image. Must be JPEG,
+                   <=8MB, sRGB. 9:16 avoids cropping. Instagram cURLs it,
+                   so the Drive file must be shared publicly.
         Returns {success, url, media_id, error}
         """
         try:
@@ -41,6 +44,12 @@ class InstagramUploader:
                 "share_to_feed": "true",
                 "access_token": self.token
             }
+            if cover_url:
+                payload["cover_url"] = cover_url
+                print(f"   Custom cover: {cover_url}")
+            else:
+                print("   No cover_url - Instagram picks a frame itself")
+
             r = requests.post(
                 f"{self.BASE_URL}/{self.account_id}/media",
                 data=payload,

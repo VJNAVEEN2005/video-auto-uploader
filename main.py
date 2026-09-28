@@ -76,11 +76,16 @@ def main():
 
     # ── Upload to Instagram ───────────────────────────────────────
     print("\n[3/4] Posting to Instagram Reels...")
-    # Instagram needs a PUBLIC video URL — we use the YouTube URL or a Drive direct link
+    # Instagram needs PUBLIC URLs — it fetches both the video and the cover
+    # image itself, so each Drive file is shared "anyone with link" first.
+    ig_cover_url = (
+        drive.get_public_url(episode["thumbnail_file_id"])
+        if episode.get("thumbnail_file_id") else None
+    )
     ig_result = ig.upload_reel(
         video_url=drive.get_public_url(episode["video_file_id"]),
         caption=episode.get("ig_caption", episode["description"]),
-        thumbnail_path=thumbnail_path
+        cover_url=ig_cover_url
     )
 
     ig_url   = ig_result.get("url", "")
