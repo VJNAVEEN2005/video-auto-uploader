@@ -300,11 +300,13 @@
     <div class="header-logo">🚀</div>
     <div>
       <div class="header-title">Mr.Quasar Upload Dashboard</div>
-      <div class="header-sub">Auto-uploads daily at 7:30 PM IST · YouTube Shorts + Instagram Reels</div>
+      <div class="header-sub">Auto-uploads daily at 7:30 PM IST · Dashboard re-synced from Drive every 2 hours</div>
     </div>
     <div class="header-actions">
       <div class="live-badge"><div class="live-dot"></div> LIVE</div>
-      <button class="btn btn-ghost" onclick="loadData()">⟳ Refresh</button>
+      <button class="btn btn-ghost" onclick="loadData()" title="Re-reads status.json from this page. The file itself is rebuilt by the Sync Drive workflow.">⟳ Refresh</button>
+      <a class="btn btn-ghost" target="_blank" rel="noopener" title="Rebuilds this dashboard from Google Drive. Uploads nothing."
+         href="https://github.com/VJNAVEEN2005/video-auto-uploader/actions/workflows/refresh-dashboard.yml">☁ Sync Drive</a>
       <a class="btn btn-primary" id="upload-now" target="_blank" rel="noopener"
          href="https://github.com/VJNAVEEN2005/video-auto-uploader/actions/workflows/upload.yml">⚡ Upload Now</a>
     </div>
@@ -410,9 +412,10 @@
   </div>
 
   <div class="footer">
-    Status snapshot written by <strong>publish_status.py</strong> after every GitHub Actions run ·
+    Status snapshot written by <strong>publish_status.py</strong> after every upload run and every 2-hour Drive sync ·
     Data source: Google Drive <code>Queue/</code>, <code>Uploaded/</code>, <code>Failed/</code><br/>
     <span id="snap-time"></span><br/>
+    <a href="https://github.com/VJNAVEEN2005/video-auto-uploader/actions/workflows/refresh-dashboard.yml" target="_blank" rel="noopener">Sync Drive now →</a> ·
     <a href="https://github.com/VJNAVEEN2005/video-auto-uploader/actions" target="_blank" rel="noopener">View all workflow runs →</a>
   </div>
 </div>
