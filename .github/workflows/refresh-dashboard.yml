@@ -4,6 +4,13 @@ name: 📊 Refresh Dashboard
 # runs were invisible on the dashboard. This workflow only rebuilds
 # docs/status.json -- it never uploads anything.
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/refresh-dashboard.yml"
+      - "publish_status.py"
+      - "drive_handler.py"
   schedule:
     # every 2 hours (UTC)
     - cron: '0 */2 * * *'
