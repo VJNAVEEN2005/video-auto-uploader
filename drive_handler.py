@@ -146,6 +146,55 @@ class DriveHandler:
             "thumbnail_file_id": thumb_file["id"] if thumb_file else None,
         }
 
+    # ── Scan a top-level folder (Queue/Uploaded/Failed) for the dashboard ─────
+    def scan_folder(self, folder_name: str) -> list[dict]:
+        """
+        Returns one entry per episode subfolder, with the file inventory inside.
+        Used by publish_status.py to build the dashboard's status.json.
+        Never raises — an unreachable folder yields [].
+        """
+        parent_id = self._find_folder(folder_name)
+        if not parent_id:
+            return []
+
+        q = (f"mimeType='application/vnd.google-apps.folder' "
+             f"and '{parent_id}' in parents and trashed=false")
+        res = self.service.files().list(
+            q=q, fields="files(id,name,modifiedTime)", orderBy="name"
+        ).execute()
+
+        entries = []
+        for folder in res.get("files", []):
+            files = self.service.files().list(
+                q=f"'{folder['id']}' in parents and trashed=false",
+                fields="files(id,name,size)"
+            ).execute().get("files", [])
+
+            video   = next((f for f in files if f["name"].lower().endswith(".mp4")), None)
+            thumb   = next((f for f in files if f["name"].lower().startswith("thumbnail")), None)
+            meta    = next((f for f in files if f["name"] == "meta.json"), None)
+
+            title = folder["name"]
+            if meta:
+                try:
+                    title = json.loads(
+                        self._download_as_bytes(meta["id"]).decode("utf-8")
+                    ).get("title", folder["name"])
+                except (ValueError, UnicodeDecodeError):
+                    pass  # malformed meta.json — fall back to folder name
+
+            entries.append({
+                "folder":     folder["name"],
+                "title":      title,
+                "video_mb":   round(int(video["size"]) / 1048576) if video else 0,
+                "has_video":  bool(video),
+                "has_thumb":  bool(thumb),
+                "has_meta":   bool(meta),
+                "modified":   folder.get("modifiedTime", ""),
+                "drive_link": f"https://drive.google.com/drive/folders/{folder['id']}",
+            })
+        return entries
+
     # ── Download a file by ID to local path ───────────────────────────────────
     def download_file(self, file_id: str, local_name: str) -> str:
         request = self.service.files().get_media(fileId=file_id)

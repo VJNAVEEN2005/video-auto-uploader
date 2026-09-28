@@ -20,6 +20,7 @@
       --green:      #00e676;
       --red:        #ff5252;
       --yellow:     #ffd740;
+      --orange:     #ff9d40;
       --text:       #e8eaf0;
       --text-dim:   #7c7f93;
       --radius:     12px;
@@ -33,31 +34,58 @@
       padding: 24px 16px 60px;
     }
 
+    .wrap { max-width: 1080px; margin: 0 auto; }
+
     /* ── Header ─────────────────────────────────────────────────── */
     .header {
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
     }
-    .header-logo {
-      font-size: 36px;
-    }
+    .header-logo { font-size: 36px; }
     .header-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 22px;
       font-weight: 700;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .header-sub {
+    .header-sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+    .header-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: 9px;
       font-size: 12px;
-      color: var(--text-dim);
-      margin-top: 2px;
+      font-weight: 600;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
     }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #8b5cf6);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(108, 99, 255, 0.35);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(108, 99, 255, 0.5); }
+    .btn-ghost {
+      background: var(--surface2);
+      border-color: var(--border);
+      color: var(--text-dim);
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
     .live-badge {
-      margin-left: auto;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -85,7 +113,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 14px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
     .stat-card {
       background: var(--surface);
@@ -101,10 +129,11 @@
       font-family: 'Space Grotesk', sans-serif;
       font-size: 28px;
       font-weight: 700;
+      line-height: 1;
     }
     .stat-label { font-size: 11px; color: var(--text-dim); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-    .stat-card.green .stat-value { color: var(--green); }
-    .stat-card.red   .stat-value { color: var(--red);   }
+    .stat-card.green  .stat-value { color: var(--green); }
+    .stat-card.red    .stat-value { color: var(--red); }
     .stat-card.purple .stat-value { color: var(--accent); }
     .stat-card.yellow .stat-value { color: var(--yellow); }
 
@@ -117,11 +146,13 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
     }
     .next-upload-icon { font-size: 28px; }
     .next-upload-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
     .next-upload-time { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--accent); }
+    .next-upload-next { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
     .countdown { margin-left: auto; text-align: right; }
     .countdown-value { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--accent2); }
     .countdown-label { font-size: 11px; color: var(--text-dim); }
@@ -132,21 +163,19 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 14px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-    }
+    .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; }
     .section-meta { font-size: 12px; color: var(--text-dim); }
+    .section { margin-bottom: 28px; }
 
-    /* ── Upload Table ────────────────────────────────────────────── */
+    /* ── Table ──────────────────────────────────────────────────── */
     .table-wrap {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
-      margin-bottom: 28px;
     }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     thead tr { background: var(--surface2); }
@@ -162,10 +191,12 @@
     }
     td { padding: 13px 16px; border-bottom: 1px solid rgba(42, 43, 56, 0.6); vertical-align: middle; }
     tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(108, 99, 255, 0.04); }
-    .td-title { font-weight: 500; max-width: 200px; }
-    .td-date { color: var(--text-dim); font-size: 12px; white-space: nowrap; }
+    tbody tr:hover td { background: rgba(108, 99, 255, 0.04); }
+    .td-title { font-weight: 500; }
+    .td-dim { color: var(--text-dim); font-size: 12px; white-space: nowrap; }
+    .td-num { font-family: 'Space Grotesk', sans-serif; }
 
+    /* ── Badges ─────────────────────────────────────────────────── */
     .status-badge {
       display: inline-flex;
       align-items: center;
@@ -176,10 +207,26 @@
       font-weight: 600;
       white-space: nowrap;
     }
-    .status-ok    { background: rgba(0,230,118,0.12); color: var(--green); border: 1px solid rgba(0,230,118,0.25); }
-    .status-fail  { background: rgba(255,82,82,0.12);  color: var(--red);   border: 1px solid rgba(255,82,82,0.25);  }
-    .status-queue { background: rgba(255,215,64,0.12); color: var(--yellow);border: 1px solid rgba(255,215,64,0.25); }
+    .status-ok    { background: rgba(0,230,118,0.12); color: var(--green);  border: 1px solid rgba(0,230,118,0.25); }
+    .status-fail  { background: rgba(255,82,82,0.12);  color: var(--red);    border: 1px solid rgba(255,82,82,0.25); }
+    .status-queue { background: rgba(255,215,64,0.12); color: var(--yellow); border: 1px solid rgba(255,215,64,0.25); }
+    .status-warn  { background: rgba(255,157,64,0.12); color: var(--orange); border: 1px solid rgba(255,157,64,0.25); }
 
+    .file-chip {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-right: 4px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text-dim);
+    }
+    .file-chip.on { color: var(--green); border-color: rgba(0,230,118,0.3); background: rgba(0,230,118,0.08); }
+    .file-chip.off { color: var(--red); border-color: rgba(255,82,82,0.3); background: rgba(255,82,82,0.08); }
+
+    /* ── Links ──────────────────────────────────────────────────── */
     .link-btn {
       display: inline-flex;
       align-items: center;
@@ -191,17 +238,35 @@
       text-decoration: none;
       transition: opacity 0.2s;
     }
-    .link-btn:hover { opacity: 0.7; }
+    .link-btn:hover { opacity: 0.75; }
     .link-yt { background: rgba(255,0,0,0.12); color: #ff5252; border: 1px solid rgba(255,0,0,0.2); }
     .link-ig { background: rgba(224,64,251,0.12); color: var(--accent2); border: 1px solid rgba(224,64,251,0.2); }
+    .link-drive { background: rgba(255,215,64,0.12); color: var(--yellow); border: 1px solid rgba(255,215,64,0.2); }
     .link-none { color: var(--text-dim); font-size: 11px; }
 
-    /* ── Loading & Error ─────────────────────────────────────────── */
-    .loading-row td, .error-row td {
-      text-align: center;
-      padding: 40px;
-      color: var(--text-dim);
+    /* ── Notice box ─────────────────────────────────────────────── */
+    .notice {
+      background: rgba(255, 215, 64, 0.08);
+      border: 1px solid rgba(255, 215, 64, 0.3);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      line-height: 1.6;
     }
+    .notice strong { color: var(--yellow); }
+    .notice code {
+      background: var(--surface2);
+      padding: 1px 6px;
+      border-radius: 5px;
+      font-size: 12px;
+      color: var(--accent2);
+    }
+    .notice-steps { margin: 8px 0 0 18px; color: var(--text-dim); }
+    .notice-steps li { margin: 3px 0; }
+
+    /* ── Loading / error rows ───────────────────────────────────── */
+    .msg-row td { text-align: center; padding: 40px; color: var(--text-dim); }
     .spinner {
       display: inline-block;
       width: 22px; height: 22px;
@@ -214,37 +279,21 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── Refresh button ─────────────────────────────────────────── */
-    .refresh-btn {
-      background: rgba(108,99,255,0.15);
-      border: 1px solid rgba(108,99,255,0.35);
-      color: var(--accent);
-      padding: 7px 16px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .refresh-btn:hover { background: rgba(108,99,255,0.3); }
+    .footer { text-align: center; color: var(--text-dim); font-size: 11px; margin-top: 40px; line-height: 1.8; }
+    .footer a { color: var(--text-dim); }
 
-    /* ── Footer ─────────────────────────────────────────────────── */
-    .footer {
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 11px;
-      margin-top: 40px;
-    }
-
-    /* ── Responsive ─────────────────────────────────────────────── */
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       .header-title { font-size: 18px; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .hide-mobile { display: none; }
+      .countdown { margin-left: 0; text-align: left; }
+      .header-actions { margin-left: 0; width: 100%; }
+      .btn { flex: 1; justify-content: center; }
     }
   </style>
 </head>
 <body>
+<div class="wrap">
 
   <!-- Header -->
   <div class="header">
@@ -253,9 +302,11 @@
       <div class="header-title">Mr.Quasar Upload Dashboard</div>
       <div class="header-sub">Auto-uploads daily at 7:30 PM IST · YouTube Shorts + Instagram Reels</div>
     </div>
-    <div class="live-badge">
-      <div class="live-dot"></div>
-      LIVE
+    <div class="header-actions">
+      <div class="live-badge"><div class="live-dot"></div> LIVE</div>
+      <button class="btn btn-ghost" onclick="loadData()">⟳ Refresh</button>
+      <a class="btn btn-primary" id="upload-now" target="_blank" rel="noopener"
+         href="https://github.com/VJNAVEEN2005/video-auto-uploader/actions/workflows/upload.yml">⚡ Upload Now</a>
     </div>
   </div>
 
@@ -264,17 +315,17 @@
     <div class="stat-card green">
       <div class="stat-icon">✅</div>
       <div class="stat-value" id="stat-success">—</div>
-      <div class="stat-label">Total Uploaded</div>
+      <div class="stat-label">Uploaded</div>
+    </div>
+    <div class="stat-card yellow">
+      <div class="stat-icon">📥</div>
+      <div class="stat-value" id="stat-queue">—</div>
+      <div class="stat-label">In Queue</div>
     </div>
     <div class="stat-card red">
       <div class="stat-icon">❌</div>
       <div class="stat-value" id="stat-failed">—</div>
       <div class="stat-label">Failed</div>
-    </div>
-    <div class="stat-card yellow">
-      <div class="stat-icon">📁</div>
-      <div class="stat-value" id="stat-queue">—</div>
-      <div class="stat-label">In Queue</div>
     </div>
     <div class="stat-card purple">
       <div class="stat-icon">📅</div>
@@ -287,8 +338,9 @@
   <div class="next-upload">
     <div class="next-upload-icon">⏰</div>
     <div>
-      <div class="next-upload-label">Next Upload</div>
-      <div class="next-upload-time">Today at 7:30 PM IST</div>
+      <div class="next-upload-label">Next Auto Upload</div>
+      <div class="next-upload-time">7:30 PM IST</div>
+      <div class="next-upload-next" id="next-episode">Checking queue…</div>
     </div>
     <div class="countdown">
       <div class="countdown-value" id="countdown">—</div>
@@ -296,204 +348,219 @@
     </div>
   </div>
 
-  <!-- Upload History Table -->
-  <div class="section-header">
-    <div class="section-title">📋 Upload History</div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <span class="section-meta" id="last-refresh">Loading...</span>
-      <button class="refresh-btn" onclick="loadData()">⟳ Refresh</button>
+  <div class="notice" id="secret-notice" style="display:none">
+    <strong>⚠️ One thing to fix before the next run.</strong>
+    The <code>DRIVE_TOKEN_JSON</code> secret is what lets the workflow read your
+    Google Drive queue. Without it the job falls back to a service account that
+    has no access to your folders, and the upload fails.
+    <ul class="notice-steps">
+      <li>Open <a href="https://github.com/VJNAVEEN2005/video-auto-uploader/settings/secrets/actions" target="_blank" rel="noopener" style="color:var(--accent2)">Settings → Secrets and variables → Actions</a></li>
+      <li>Add secret <code>DRIVE_TOKEN_JSON</code> = the full contents of <code>auto-uploader/drive_token.json</code></li>
+    </ul>
+  </div>
+
+  <!-- Queue -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">📥 Queue — Not Published Yet</div>
+      <div class="section-meta" id="queue-meta">—</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Order</th>
+            <th>Episode</th>
+            <th class="hide-mobile">Files</th>
+            <th class="hide-mobile">Size</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="queue-body">
+          <tr class="msg-row"><td colspan="6"><span class="spinner"></span> Loading…</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Title</th>
-          <th class="hide-mobile">Date</th>
-          <th class="hide-mobile">Time</th>
-          <th>YouTube</th>
-          <th>Instagram</th>
-        </tr>
-      </thead>
-      <tbody id="table-body">
-        <tr class="loading-row">
-          <td colspan="6">
-            <span class="spinner"></span> Loading upload data from Google Drive...
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Upload History -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">📋 Upload History</div>
+      <div class="section-meta" id="last-refresh">Loading…</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th class="hide-mobile">Date</th>
+            <th class="hide-mobile">Time</th>
+            <th>YouTube</th>
+            <th>Instagram</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr class="msg-row"><td colspan="6"><span class="spinner"></span> Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="footer">
-    Data stored in <strong>upload_log.csv</strong> on Google Drive · 
-    Automated by GitHub Actions · 
-    Dashboard hosted on GitHub Pages<br/>
-    Mr.Quasar © 2026
+    Status snapshot written by <strong>publish_status.py</strong> after every GitHub Actions run ·
+    Data source: Google Drive <code>Queue/</code>, <code>Uploaded/</code>, <code>Failed/</code><br/>
+    <span id="snap-time"></span><br/>
+    <a href="https://github.com/VJNAVEEN2005/video-auto-uploader/actions" target="_blank" rel="noopener">View all workflow runs →</a>
   </div>
+</div>
 
-  <script>
-    // ── CONFIG ────────────────────────────────────────────────────
-    // Replace with your actual upload_log.csv Google Drive FILE ID
-    // To get: right-click file in Drive → Share → Copy link
-    // The ID is the long string in the URL between /d/ and /view
-    const DRIVE_CSV_FILE_ID = "YOUR_UPLOAD_LOG_CSV_FILE_ID_HERE";
+<script>
+  const STATUS_URL = "status.json";
+  const RUNS_URL   = "https://github.com/VJNAVEEN2005/video-auto-uploader/actions/workflows/upload.yml";
 
-    const CSV_URL = `https://docs.google.com/spreadsheets/d/${DRIVE_CSV_FILE_ID}/export?format=csv`;
-    // OR if it's a plain CSV (not Sheets), use:
-    // const CSV_URL = `https://drive.google.com/uc?export=download&id=${DRIVE_CSV_FILE_ID}`;
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-    // ── Parse CSV ─────────────────────────────────────────────────
-    function parseCSV(text) {
-      const lines = text.trim().split('\n');
-      if (lines.length < 2) return [];
-      const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-      return lines.slice(1).map(line => {
-        // Handle quoted fields with commas inside
-        const values = [];
-        let cur = '', inQ = false;
-        for (let c of line) {
-          if (c === '"') { inQ = !inQ; }
-          else if (c === ',' && !inQ) { values.push(cur.trim()); cur = ''; }
-          else cur += c;
-        }
-        values.push(cur.trim());
-        const obj = {};
-        headers.forEach((h, i) => obj[h] = (values[i] || '').replace(/"/g, ''));
-        return obj;
-      });
+  // ── Time ────────────────────────────────────────────────────────
+  const UPLOAD_HOUR_IST = 19, UPLOAD_MIN_IST = 30;
+
+  // IST wall clock = local clock + (utcOffsetMinutes + 330).
+  // getTimezoneOffset() is minutes to ADD to local to reach UTC, hence "+".
+  function istNow() {
+    return new Date(Date.now() + (new Date().getTimezoneOffset() + 330) * 60000);
+  }
+
+  function updateCountdown() {
+    const now = istNow();
+    const target = new Date(now);
+    target.setHours(UPLOAD_HOUR_IST, UPLOAD_MIN_IST, 0, 0);
+    if (now >= target) target.setDate(target.getDate() + 1);
+
+    const diff = target - now;
+    const p = (n) => String(n).padStart(2, "0");
+    $("countdown").textContent =
+      `${p(Math.floor(diff / 3600000))}:${p(Math.floor(diff % 3600000 / 60000))}:${p(Math.floor(diff % 60000 / 1000))}`;
+  }
+
+  // ── Renderers ───────────────────────────────────────────────────
+  function renderQueue(queue) {
+    const body = $("queue-body");
+
+    if (!queue.length) {
+      $("queue-meta").textContent = "empty";
+      body.innerHTML = `<tr class="msg-row"><td colspan="6">📭 Queue is empty — nothing waiting to publish.</td></tr>`;
+      $("next-episode").textContent = "Queue empty";
+      return;
     }
 
-    // ── Render table ──────────────────────────────────────────────
-    function renderTable(rows) {
-      const tbody = document.getElementById('table-body');
+    $("queue-meta").textContent = `${queue.length} waiting · ${queue.filter(e => e.ready).length} ready to upload`;
+    $("next-episode").textContent = `Next up: ${queue[0].title}`;
 
-      if (!rows.length) {
-        tbody.innerHTML = `<tr class="loading-row"><td colspan="6">📭 No uploads yet. First upload will appear here after 7:30 PM IST today.</td></tr>`;
-        return;
-      }
+    body.innerHTML = queue.map((ep, i) => {
+      const chips = [
+        `<span class="file-chip ${ep.has_video ? "on" : "off"}">${ep.has_video ? "✓" : "✕"} mp4</span>`,
+        `<span class="file-chip ${ep.has_thumb ? "on" : "off"}">${ep.has_thumb ? "✓" : "✕"} thumb</span>`,
+        `<span class="file-chip ${ep.has_meta  ? "on" : "off"}">${ep.has_meta  ? "✓" : "✕"} meta</span>`,
+      ].join("");
 
-      // Reverse so newest is first
-      const sorted = [...rows].reverse();
+      // A queue entry missing meta.json can never upload — flag it loudly.
+      const badge = ep.ready
+        ? `<span class="status-badge status-ok">Ready</span>`
+        : `<span class="status-badge status-warn">Incomplete</span>`;
 
-      tbody.innerHTML = sorted.map((row, i) => {
-        const ytOk = row.youtube_status && row.youtube_status.startsWith('✅');
-        const igOk = row.instagram_status && row.instagram_status.startsWith('✅');
+      const note = ep.ready ? "" :
+        `<div style="font-size:11px;color:var(--orange);margin-top:4px">Missing ${[!ep.has_video && "video.mp4", !ep.has_meta && "meta.json"].filter(Boolean).join(" and ")}</div>`;
 
-        const ytLink = row.youtube_url && row.youtube_url.startsWith('http')
-          ? `<a class="link-btn link-yt" href="${row.youtube_url}" target="_blank">▶ Watch</a>`
-          : `<span class="link-none">—</span>`;
+      return `
+        <tr>
+          <td class="td-num td-dim">${i === 0 ? "①" : String(i + 1)}</td>
+          <td class="td-title">${esc(ep.title)}<div class="td-dim" style="font-weight:400">${esc(ep.folder)}</div></td>
+          <td class="hide-mobile">${chips}</td>
+          <td class="td-dim hide-mobile">${ep.video_mb ? ep.video_mb + " MB" : "—"}</td>
+          <td>${badge}${note}</td>
+          <td><a class="link-btn link-drive" href="${esc(ep.drive_link)}" target="_blank" rel="noopener">📁 Drive</a></td>
+        </tr>`;
+    }).join("");
+  }
 
-        const igLink = row.instagram_url && row.instagram_url.startsWith('http')
-          ? `<a class="link-btn link-ig" href="${row.instagram_url}" target="_blank">📸 View</a>`
-          : `<span class="link-none">—</span>`;
+  function renderHistory(history) {
+    const body = $("table-body");
 
-        return `
-          <tr>
-            <td style="color:var(--text-dim);font-size:12px">${rows.length - i}</td>
-            <td class="td-title">${row.title || '—'}</td>
-            <td class="td-date hide-mobile">${row.upload_date || '—'}</td>
-            <td class="td-date hide-mobile">${row.upload_time || '—'}</td>
-            <td>
-              <span class="status-badge ${ytOk ? 'status-ok' : 'status-fail'}">
-                ${ytOk ? '✅' : '❌'} ${ytOk ? 'Live' : 'Failed'}
-              </span>
-              ${ytLink}
-            </td>
-            <td>
-              <span class="status-badge ${igOk ? 'status-ok' : 'status-fail'}">
-                ${igOk ? '✅' : '❌'} ${igOk ? 'Posted' : 'Failed'}
-              </span>
-              ${igLink}
-            </td>
-          </tr>
-        `;
-      }).join('');
+    if (!history.length) {
+      body.innerHTML = `<tr class="msg-row"><td colspan="6">📭 No uploads logged yet. The first run tonight at 7:30 PM IST will appear here.</td></tr>`;
+      return;
     }
 
-    // ── Update stats ──────────────────────────────────────────────
-    function updateStats(rows) {
-      const success = rows.filter(r =>
-        r.youtube_status && r.youtube_status.startsWith('✅') &&
-        r.instagram_status && r.instagram_status.startsWith('✅')
-      ).length;
-      const failed = rows.filter(r =>
-        (r.youtube_status && r.youtube_status.startsWith('❌')) ||
-        (r.instagram_status && r.instagram_status.startsWith('❌'))
-      ).length;
+    body.innerHTML = [...history].reverse().map((row, i) => {
+      const ytOk = String(row.youtube_status || "").trim().startsWith("✅");
+      const igOk = String(row.instagram_status || "").trim().startsWith("✅");
 
-      document.getElementById('stat-success').textContent = success;
-      document.getElementById('stat-failed').textContent  = failed;
+      const ytLink = String(row.youtube_url || "").startsWith("http")
+        ? `<a class="link-btn link-yt" href="${esc(row.youtube_url)}" target="_blank" rel="noopener">▶ Watch</a>`
+        : `<span class="link-none">—</span>`;
+      const igLink = String(row.instagram_url || "").startsWith("http")
+        ? `<a class="link-btn link-ig" href="${esc(row.instagram_url)}" target="_blank" rel="noopener">📸 View</a>`
+        : `<span class="link-none">—</span>`;
 
-      // Streak: count consecutive days with uploads
-      let streak = 0;
-      const today = new Date().toISOString().split('T')[0];
-      const dates = [...new Set(rows.map(r => r.upload_date))].sort().reverse();
-      let check = new Date();
-      for (const d of dates) {
-        const diff = Math.round((check - new Date(d)) / 86400000);
-        if (diff <= 1) { streak++; check = new Date(d); }
-        else break;
-      }
-      document.getElementById('stat-streak').textContent = streak;
-      // Queue count is not in log — show placeholder
-      document.getElementById('stat-queue').textContent  = '—';
+      return `
+        <tr>
+          <td class="td-dim">${history.length - i}</td>
+          <td class="td-title">${esc(row.title || "—")}</td>
+          <td class="td-dim hide-mobile">${esc(row.upload_date || "—")}</td>
+          <td class="td-dim hide-mobile">${esc(row.upload_time || "—")}</td>
+          <td><span class="status-badge ${ytOk ? "status-ok" : "status-fail"}">${ytOk ? "Live" : "Failed"}</span> ${ytLink}</td>
+          <td><span class="status-badge ${igOk ? "status-ok" : "status-fail"}">${igOk ? "Posted" : "Failed"}</span> ${igLink}</td>
+        </tr>`;
+    }).join("");
+  }
+
+  function renderStats(s) {
+    $("stat-success").textContent = s.total_uploaded ?? 0;
+    $("stat-queue").textContent   = s.pending ?? 0;
+    $("stat-failed").textContent  = s.failed ?? 0;
+    $("stat-streak").textContent  = s.streak ?? 0;
+  }
+
+  // ── Load ────────────────────────────────────────────────────────
+  async function loadData() {
+    $("last-refresh").textContent = "Refreshing…";
+    try {
+      const res = await fetch(STATUS_URL + "?t=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+
+      renderStats(data.stats || {});
+      renderQueue(data.queue || []);
+      renderHistory(data.history || []);
+
+      $("last-refresh").textContent = "Updated " + new Date().toLocaleTimeString("en-IN");
+      $("snap-time").textContent = data.generated_at_ist
+        ? "Snapshot taken " + esc(data.generated_at_ist) : "";
+
+      // Deep-link straight to the dispatch form.
+      $("upload-now").href = RUNS_URL;
+
+      // If the last recorded run failed, surface the fix hint.
+      const outcome = (data.last_run && data.last_run.outcome) || "";
+      if (outcome && outcome !== "success") $("secret-notice").style.display = "";
+
+    } catch (err) {
+      $("table-body").innerHTML = `<tr class="msg-row"><td colspan="6">⚠️ Could not load status.json.<br/><small>${esc(err.message)}</small></td></tr>`;
+      $("queue-body").innerHTML  = `<tr class="msg-row"><td colspan="6">⚠️ No data yet.</td></tr>`;
+      $("last-refresh").textContent = "Failed to load";
+      $("next-episode").textContent = "Unknown";
     }
+  }
 
-    // ── Countdown to 7:30 PM IST ──────────────────────────────────
-    function updateCountdown() {
-      const now = new Date();
-      // IST = UTC+5:30
-      const istOffset = 5.5 * 60 * 60 * 1000;
-      const istNow = new Date(now.getTime() + istOffset - now.getTimezoneOffset() * 60000);
-      let target = new Date(istNow);
-      target.setHours(19, 30, 0, 0);
-      if (istNow >= target) target.setDate(target.getDate() + 1);
-
-      const diff = target - istNow;
-      const h = Math.floor(diff / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      document.getElementById('countdown').textContent =
-        `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    }
-
-    // ── Load data from Drive ──────────────────────────────────────
-    async function loadData() {
-      document.getElementById('last-refresh').textContent = 'Refreshing...';
-      try {
-        // Using a CORS proxy since Drive CSV isn't always CORS-enabled
-        const url = CSV_URL;
-        const res = await fetch(url, { cache: 'no-store' });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const text = await res.text();
-        const rows = parseCSV(text);
-        renderTable(rows);
-        updateStats(rows);
-        document.getElementById('last-refresh').textContent =
-          `Last refreshed: ${new Date().toLocaleTimeString('en-IN')}`;
-      } catch (err) {
-        console.error(err);
-        document.getElementById('table-body').innerHTML = `
-          <tr class="error-row">
-            <td colspan="6">
-              ⚠️ Could not load data. Make sure upload_log.csv is publicly shared on Drive.<br/>
-              <small style="color:var(--text-dim)">${err.message}</small>
-            </td>
-          </tr>`;
-        document.getElementById('last-refresh').textContent = 'Failed to load';
-      }
-    }
-
-    // ── Init ──────────────────────────────────────────────────────
-    loadData();
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-    // Auto-refresh every 5 minutes
-    setInterval(loadData, 5 * 60 * 1000);
-  </script>
-
+  // ── Init ────────────────────────────────────────────────────────
+  loadData();
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+  setInterval(loadData, 5 * 60 * 1000);
+</script>
 </body>
 </html>

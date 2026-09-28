@@ -18,7 +18,12 @@ def main():
     print("=" * 60)
 
     # ── Init all services ──────────────────────────────────────────
-    drive    = DriveHandler(service_account_file="auto-uploader/service_account.json")
+    if not os.environ.get("DRIVE_TOKEN_JSON"):
+        print("❌ DRIVE_TOKEN_JSON secret is not set — cannot access Google Drive.")
+        print("   Add it under: Settings → Secrets and variables → Actions")
+        sys.exit(1)
+
+    drive    = DriveHandler()
     yt       = YouTubeUploader(token_file="auto-uploader/youtube_token.json")
     ig       = InstagramUploader(
                     access_token=os.environ["INSTAGRAM_ACCESS_TOKEN"],
@@ -93,8 +98,12 @@ def main():
         ig_status="✅ Posted" if ig_ok else f"❌ Failed: {ig_error}",
     )
 
-    # Move video from Queue → Uploaded folder on Drive
-    drive.move_to_uploaded(episode["folder_id"])
+    # Move video out of Queue only when it actually published. A failed episode
+    # goes to Failed/ so it stays visible on the dashboard and can be retried.
+    if yt_ok and ig_ok:
+        drive.move_to_uploaded(episode["folder_id"])
+    else:
+        drive.move_to_failed(episode["folder_id"])
 
     # ── Telegram notification ─────────────────────────────────────
     status_icon = "✅" if (yt_ok and ig_ok) else "⚠️"

@@ -12,6 +12,9 @@ on:
         required: false
         default: ''
 
+permissions:
+  contents: write   # needed to commit the dashboard status.json back to the repo
+
 jobs:
   upload:
     name: Upload to YouTube + Instagram
@@ -21,6 +24,11 @@ jobs:
     steps:
       - name: 📥 Checkout repo
         uses: actions/checkout@v4
+        with:
+          ref: main
+          # The status.json commit step below pushes to main, so it needs the
+          # full history to avoid a detached shallow push.
+          fetch-depth: 0
 
       - name: 🐍 Set up Python 3.11
         uses: actions/setup-python@v5
@@ -31,10 +39,6 @@ jobs:
       - name: 📦 Install dependencies
         run: pip install -r auto-uploader/requirements.txt
 
-      - name: 🔐 Create Google Service Account Key
-        run: |
-          echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}' > auto-uploader/service_account.json
-
       - name: 🔐 Create YouTube OAuth Token
         run: |
           echo '${{ secrets.YOUTUBE_TOKEN_JSON }}' > auto-uploader/youtube_token.json
@@ -43,6 +47,7 @@ jobs:
         env:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          DRIVE_TOKEN_JSON: ${{ secrets.DRIVE_TOKEN_JSON }}
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -50,6 +55,28 @@ jobs:
           GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
           FORCE_EPISODE: ${{ github.event.inputs.force_episode }}
         run: python auto-uploader/main.py
+
+      - name: 📊 Publish dashboard status.json
+        if: always()
+        env:
+          RUN_OUTCOME: ${{ job.status }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python auto-uploader/publish_status.py
+
+      - name: 📤 Commit status.json to repo
+        if: always()
+        # A push failure (e.g. protected branch) must not fail a successful upload.
+        continue-on-error: true
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- auto-uploader/dashboard/status.json; then
+            echo "status.json unchanged - nothing to commit"
+            exit 0
+          fi
+          git add auto-uploader/dashboard/status.json
+          git commit -m "chore: refresh dashboard status [skip ci]"
+          git push origin HEAD:main
 
       - name: 🧹 Remove sensitive files
         if: always()

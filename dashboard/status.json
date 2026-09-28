@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-09-28T07:39:26.963251+05:30",
+  "generated_at_ist": "28 Sep 2026, 07:39 AM IST",
+  "last_run": {
+    "outcome": "",
+    "url": "",
+    "at": null
+  },
+  "queue": [
+    {
+      "folder": "04_Titan_Methane_Rain",
+      "title": "A Planet Where It Literally Rains Pure Fuel?! #Shorts",
+      "video_mb": 154,
+      "has_video": true,
+      "has_thumb": true,
+      "has_meta": true,
+      "modified": "2026-09-28T01:46:02.728Z",
+      "drive_link": "https://drive.google.com/drive/folders/19NvcWGdWLndjtov3bo1U2xGWd92xejBA",
+      "ready": true
+    },
+    {
+      "folder": "05_Titan_Secret_Ocean",
+      "title": "Titan Has a SECRET Ocean Under Its Ice #Shorts",
+      "video_mb": 83,
+      "has_video": true,
+      "has_thumb": true,
+      "has_meta": true,
+      "modified": "2026-09-28T01:49:37.652Z",
+      "drive_link": "https://drive.google.com/drive/folders/1ivyNssUcGaF8UMFkC_tK977nKPmXc6P-",
+      "ready": true
+    }
+  ],
+  "uploaded": [],
+  "failed": [],
+  "history": [],
+  "stats": {
+    "pending": 2,
+    "ready": 2,
+    "blocked": 0,
+    "total_uploaded": 0,
+    "failed": 0,
+    "streak": 0
+  }
+}

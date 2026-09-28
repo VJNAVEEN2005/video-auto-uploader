@@ -1,6 +1,7 @@
 # Auto-generated secrets — never commit these!
 service_account.json
 youtube_token.json
+drive_token.json
 client_secrets.json
 *.env
 .env*
