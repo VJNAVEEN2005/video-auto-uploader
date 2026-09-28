@@ -6,8 +6,11 @@ and updates upload_log.csv so the dashboard can display live data.
 
 import os
 import io
+import re
 import json
 import csv
+import urllib.parse
+import urllib.request
 from datetime import datetime
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
@@ -18,6 +21,10 @@ from google.auth.transport.requests import Request
 SCOPES = [
     "https://www.googleapis.com/auth/drive.file",
 ]
+
+# Drive interposes a virus-scan warning for files larger than this; such files
+# need a confirm token before they can be fetched by a third party.
+CONFIRM_THRESHOLD_BYTES = 100 * 1024 * 1024
 
 # ── Folder names inside your Google Drive root folder ─────────────────────────
 QUEUE_FOLDER_NAME    = "Queue"
@@ -260,12 +267,50 @@ class DriveHandler:
 
     # ── Get a public shareable URL for a file ─────────────────────────────────
     def get_public_url(self, file_id: str) -> str:
-        """Make file public and return direct download URL (needed for Instagram API)."""
+        """
+        Make the file public and return a direct download URL.
+
+        Drive interposes a "can't scan for viruses" HTML page for files over
+        ~100MB, so a plain /uc?export=download link hands Instagram a web page
+        instead of the video and the container is rejected. Fetching the
+        interstitial and re-requesting with its confirm token returns real bytes.
+        Small files (e.g. thumbnails) skip the extra round trip.
+        """
         self.service.permissions().create(
             fileId=file_id,
             body={"role": "reader", "type": "anyone"}
         ).execute()
-        return f"https://drive.google.com/uc?export=download&id={file_id}"
+
+        plain = f"https://drive.google.com/uc?export=download&id={file_id}"
+        if not self._needs_confirm(file_id):
+            return plain
+
+        html = self._fetch_text(plain)
+        action = re.search(r'<form[^>]*action="([^"]+)"', html)
+        fields = dict(re.findall(r'name="([^"]+)"\s+value="([^"]*)"', html))
+        if not action or "uuid" not in fields:
+            return plain  # no interstitial after all
+
+        params = dict(urllib.parse.parse_qsl(urllib.parse.urlparse(action.group(1)).query))
+        params.update(fields)
+        params.pop("at", None)
+        print(f"   ℹ️  Large file - resolved Drive virus-scan confirm token")
+        return f"{action.group(1)}?{urllib.parse.urlencode(params)}"
+
+    def _needs_confirm(self, file_id: str) -> bool:
+        """True when Drive will interpose the virus-scan page for this file."""
+        try:
+            meta = self.service.files().get(
+                fileId=file_id, fields="size", supportsAllDrives=True
+            ).execute()
+            return int(meta.get("size", 0)) > CONFIRM_THRESHOLD_BYTES
+        except Exception:
+            return False
+
+    def _fetch_text(self, url: str) -> str:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return resp.read().decode("utf-8", "replace")
 
     # ── Read/write upload_log.csv ─────────────────────────────────────────────
     def read_log(self) -> list[dict]:
