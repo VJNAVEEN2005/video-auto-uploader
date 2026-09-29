@@ -1,24 +1,12 @@
 {
-  "generated_at": "2026-09-29T17:04:42.791347+05:30",
-  "generated_at_ist": "29 Sep 2026, 05:04 PM IST",
+  "generated_at": "2026-09-29T19:57:18.256238+05:30",
+  "generated_at_ist": "29 Sep 2026, 07:57 PM IST",
   "last_run": {
-    "outcome": "",
-    "url": "",
-    "at": null
+    "outcome": "success",
+    "url": "https://github.com/VJNAVEEN2005/video-auto-uploader/actions/runs/36582588574",
+    "at": "2026-09-29T19:57:18.256238+05:30"
   },
-  "queue": [
-    {
-      "folder": "07_Neutron_Star_City_Size",
-      "title": "07_Neutron_Star_City_Size",
-      "video_mb": 55,
-      "has_video": true,
-      "has_thumb": false,
-      "has_meta": false,
-      "modified": "2026-09-29T11:24:29.135Z",
-      "drive_link": "https://drive.google.com/drive/folders/1NNIQJFAE9QhQ42-GMSgmVPE3V5W1DOQD",
-      "ready": false
-    }
-  ],
+  "queue": [],
   "uploaded": [
     {
       "folder": "04_Titan_Methane_Rain",
@@ -49,6 +37,16 @@
       "has_meta": true,
       "modified": "2026-09-28T16:03:15.046Z",
       "drive_link": "https://drive.google.com/drive/folders/1SF1DIZP1pideQB1TMGMdX-J1-o6Yl5G-"
+    },
+    {
+      "folder": "07_Neutron_Star_City_Size",
+      "title": "What If You Touch a NEUTRON STAR? Beast of Mass in a City! #shorts",
+      "video_mb": 55,
+      "has_video": true,
+      "has_thumb": false,
+      "has_meta": true,
+      "modified": "2026-09-29T11:24:29.135Z",
+      "drive_link": "https://drive.google.com/drive/folders/1NNIQJFAE9QhQ42-GMSgmVPE3V5W1DOQD"
     }
   ],
   "failed": [],
@@ -82,13 +80,23 @@
       "youtube_status": "\u2705 Uploaded",
       "instagram_url": "https://www.instagram.com/reel/Dd2B_2Xj3tO/",
       "instagram_status": "\u2705 Posted"
+    },
+    {
+      "episode_id": "07_Neutron_Star_City_Size",
+      "title": "What If You Touch a NEUTRON STAR? Beast of Mass in a City! #shorts",
+      "upload_date": "2026-09-29",
+      "upload_time": "07:57 PM IST",
+      "youtube_url": "https://www.youtube.com/shorts/kWqxsN4x6D4",
+      "youtube_status": "\u2705 Uploaded",
+      "instagram_url": "https://www.instagram.com/reel/Dd3-IGnE9KH/",
+      "instagram_status": "\u2705 Posted"
     }
   ],
   "stats": {
-    "pending": 1,
+    "pending": 0,
     "ready": 0,
-    "blocked": 1,
-    "total_uploaded": 3,
+    "blocked": 0,
+    "total_uploaded": 4,
     "failed": 0,
     "streak": 2
   }
