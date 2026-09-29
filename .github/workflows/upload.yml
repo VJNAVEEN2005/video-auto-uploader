@@ -50,7 +50,24 @@ jobs:
         run: |
           echo '${{ secrets.YOUTUBE_TOKEN_JSON }}' > youtube_token.json
 
+      - name: ⏱️ Verify scheduled upload window
+        id: schedule-window
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "allowed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          hour="$(TZ=Asia/Kolkata date +%H)"
+          if [ "$hour" = "19" ]; then
+            echo "Scheduled run is inside the 7:30 PM IST hour."
+            echo "allowed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Scheduled event arrived at $(TZ=Asia/Kolkata date '+%Y-%m-%d %H:%M %Z'); skipping upload."
+            echo "allowed=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: 🚀 Run Auto Uploader
+        if: steps.schedule-window.outputs.allowed == 'true'
         env:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
