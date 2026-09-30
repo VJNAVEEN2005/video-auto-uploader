@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-30T14:38:17.740217+05:30",
-  "generated_at_ist": "30 Sep 2026, 02:38 PM IST",
+  "generated_at": "2026-09-30T22:03:14.226306+05:30",
+  "generated_at_ist": "30 Sep 2026, 10:03 PM IST",
   "last_run": {
     "outcome": "",
     "url": "",
@@ -47,6 +47,16 @@
       "has_meta": true,
       "modified": "2026-09-29T11:24:29.135Z",
       "drive_link": "https://drive.google.com/drive/folders/1NNIQJFAE9QhQ42-GMSgmVPE3V5W1DOQD"
+    },
+    {
+      "folder": "08_55_Cancri_e_Lava_Planet",
+      "title": "A Planet Where A Whole YEAR Lasts Only 18 HOURS?! \ud83c\udf0b\u23f1\ufe0f #shorts",
+      "video_mb": 113,
+      "has_video": true,
+      "has_thumb": true,
+      "has_meta": true,
+      "modified": "2026-09-30T14:10:11.765Z",
+      "drive_link": "https://drive.google.com/drive/folders/1jk72amxSNuQaaDwhJZZk69BWPsig3N6W"
     }
   ],
   "failed": [],
@@ -90,14 +100,24 @@
       "youtube_status": "\u2705 Uploaded",
       "instagram_url": "https://www.instagram.com/reel/Dd3-IGnE9KH/",
       "instagram_status": "\u2705 Posted"
+    },
+    {
+      "episode_id": "08_55_Cancri_e_Lava_Planet",
+      "title": "A Planet Where A Whole YEAR Lasts Only 18 HOURS?!",
+      "upload_date": "2026-09-30",
+      "upload_time": "09:37 PM IST",
+      "youtube_url": "https://www.youtube.com/shorts/G0emku_Svjg",
+      "youtube_status": "\u2705 Uploaded",
+      "instagram_url": "https://www.instagram.com/reel/Dd6qtS9F45z/",
+      "instagram_status": "\u2705 Posted"
     }
   ],
   "stats": {
     "pending": 0,
     "ready": 0,
     "blocked": 0,
-    "total_uploaded": 4,
+    "total_uploaded": 5,
     "failed": 0,
-    "streak": 2
+    "streak": 3
   }
 }
