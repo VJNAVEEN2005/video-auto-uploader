@@ -114,16 +114,35 @@ class YouTubeUploader:
             url = f"https://www.youtube.com/shorts/{video_id}"
             print(f"   ✅ YouTube upload complete! {url}")
 
-            # Upload thumbnail
+            # Upload thumbnail with ingestion delay and retry logic
             if thumbnail_path and os.path.exists(thumbnail_path):
-                try:
-                    self.service.thumbnails().set(
-                        videoId=video_id,
-                        media_body=MediaFileUpload(thumbnail_path, mimetype="image/jpeg")
-                    ).execute()
-                    print("   🖼️  Thumbnail uploaded.")
-                except Exception as e:
-                    print(f"   ⚠️  Thumbnail upload note: {e}")
+                # Verify file size (YouTube max is 2MB)
+                thumb_size_mb = os.path.getsize(thumbnail_path) / (1024 * 1024)
+                if thumb_size_mb > 2.0:
+                    print(f"   ⚠️  Warning: Thumbnail file size ({thumb_size_mb:.2f}MB) exceeds YouTube 2MB limit!")
+                
+                mime = "image/png" if thumbnail_path.lower().endswith(".png") else "image/jpeg"
+                print(f"   🖼️  Waiting 6s for YouTube ingestion before setting thumbnail ({thumb_size_mb:.2f}MB)...")
+                time.sleep(6)
+
+                thumb_uploaded = False
+                for attempt in range(1, 4):
+                    try:
+                        self.service.thumbnails().set(
+                            videoId=video_id,
+                            media_body=MediaFileUpload(thumbnail_path, mimetype=mime, resumable=True)
+                        ).execute()
+                        print("   ✅ Thumbnail uploaded successfully.")
+                        thumb_uploaded = True
+                        break
+                    except Exception as e:
+                        err_str = str(e)
+                        if "403" in err_str or "uploadForbidden" in err_str:
+                            print(f"   ⚠️  Thumbnail 403 Forbidden: Channel lacks Phone Verification / Intermediate features in YouTube Studio, or lacks full OAuth scope.")
+                            break
+                        print(f"   ⚠️  Thumbnail upload attempt {attempt}/3 note: {e}")
+                        if attempt < 3:
+                            time.sleep(5 * attempt)
 
             return {"success": True, "url": url, "video_id": video_id}
 
