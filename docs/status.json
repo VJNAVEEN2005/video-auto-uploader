@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-02T00:41:00.551663+05:30",
-  "generated_at_ist": "02 Oct 2026, 12:41 AM IST",
+  "generated_at": "2026-10-02T04:27:08.360399+05:30",
+  "generated_at_ist": "02 Oct 2026, 04:27 AM IST",
   "last_run": {
-    "outcome": "success",
-    "url": "https://github.com/VJNAVEEN2005/video-auto-uploader/actions/runs/36912360857",
-    "at": "2026-10-02T00:41:00.551663+05:30"
+    "outcome": "",
+    "url": "",
+    "at": null
   },
   "queue": [
     {
