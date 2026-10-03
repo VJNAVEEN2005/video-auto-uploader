@@ -1,24 +1,12 @@
 {
-  "generated_at": "2026-10-03T19:33:46.123135+05:30",
-  "generated_at_ist": "03 Oct 2026, 07:33 PM IST",
+  "generated_at": "2026-10-03T23:12:22.789464+05:30",
+  "generated_at_ist": "03 Oct 2026, 11:12 PM IST",
   "last_run": {
-    "outcome": "",
-    "url": "",
-    "at": null
+    "outcome": "failure",
+    "url": "https://github.com/VJNAVEEN2005/video-auto-uploader/actions/runs/37141461416",
+    "at": "2026-10-03T23:12:22.789464+05:30"
   },
-  "queue": [
-    {
-      "folder": "09_HD189733b_Glass_Rain",
-      "title": "The Beautiful Blue Planet That Rains GLASS Sideways! \ud83c\udf27\ufe0f\ud83d\udc8e #shorts",
-      "video_mb": 32,
-      "has_video": true,
-      "has_thumb": true,
-      "has_meta": true,
-      "modified": "2026-10-01T07:28:37.626Z",
-      "drive_link": "https://drive.google.com/drive/folders/1yQfpx0P8ZF-DkU-w_IqyfqB9ziecvRhq",
-      "ready": true
-    }
-  ],
+  "queue": [],
   "uploaded": [
     {
       "folder": "04_Titan_Methane_Rain",
@@ -71,7 +59,18 @@
       "drive_link": "https://drive.google.com/drive/folders/1jk72amxSNuQaaDwhJZZk69BWPsig3N6W"
     }
   ],
-  "failed": [],
+  "failed": [
+    {
+      "folder": "09_HD189733b_Glass_Rain",
+      "title": "The Beautiful Blue Planet That Rains GLASS Sideways! \ud83c\udf27\ufe0f\ud83d\udc8e #shorts",
+      "video_mb": 32,
+      "has_video": true,
+      "has_thumb": true,
+      "has_meta": true,
+      "modified": "2026-10-01T07:28:37.626Z",
+      "drive_link": "https://drive.google.com/drive/folders/1yQfpx0P8ZF-DkU-w_IqyfqB9ziecvRhq"
+    }
+  ],
   "history": [
     {
       "episode_id": "04_Titan_Methane_Rain",
@@ -122,14 +121,24 @@
       "youtube_status": "\u2705 Uploaded",
       "instagram_url": "https://www.instagram.com/reel/Dd6qtS9F45z/",
       "instagram_status": "\u2705 Posted"
+    },
+    {
+      "episode_id": "09_HD189733b_Glass_Rain",
+      "title": "The Beautiful Blue Planet That Rains GLASS Sideways! \ud83c\udf27\ufe0f\ud83d\udc8e #shorts",
+      "upload_date": "2026-10-03",
+      "upload_time": "11:12 PM IST",
+      "youtube_url": "https://www.youtube.com/shorts/izihQBuctEA",
+      "youtube_status": "\u2705 Uploaded",
+      "instagram_url": "",
+      "instagram_status": "\u274c Failed: 400 Client Error: Bad Request for url: https://graph.instagram.com/v23.0/39886455494301756/media"
     }
   ],
   "stats": {
-    "pending": 1,
-    "ready": 1,
+    "pending": 0,
+    "ready": 0,
     "blocked": 0,
     "total_uploaded": 5,
-    "failed": 0,
-    "streak": 0
+    "failed": 1,
+    "streak": 1
   }
 }
